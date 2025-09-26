@@ -31,5 +31,5 @@ setImmediate(LoadStatuses);
 
 addCommand('reloadstatuses', LoadStatuses, {
   help: 'Reload statuses from the database.',
-  restricted: 'group.admin',
+  restricted: 'group.staff_superadmin',
 });

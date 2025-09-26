@@ -5,7 +5,7 @@ import { OxPlayer } from 'player/class';
 
 addCommand('logout', async (playerId) => OxPlayer.get(playerId).logout(true), {
   help: 'Logout and return to character selection.',
-  restricted: 'group.admin',
+  restricted: 'group.staff_superadmin',
 });
 
 addCommand(
@@ -19,7 +19,7 @@ addCommand(
   },
   {
     help: 'Hard delete your current character (cannot be reversed).',
-    restricted: 'group.admin',
+    restricted: 'group.staff_superadmin',
   },
 );
 
@@ -31,5 +31,6 @@ addCommand(
   },
   {
     help: 'Display basic character information.',
+    restricted: 'group.staff_superadmin',
   },
 );

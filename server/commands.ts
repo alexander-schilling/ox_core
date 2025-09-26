@@ -10,6 +10,6 @@ addCommand(
   },
   {
     help: 'Saves all players and vehicles to the database.',
-    restricted: 'group.admin',
+    restricted: 'group.staff_superadmin',
   },
 );

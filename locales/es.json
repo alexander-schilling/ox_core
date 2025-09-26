@@ -19,5 +19,10 @@
   "ban_notice": "⚠️ Has sido baneado de este servidor! ⚠️\nBaneado el: %s\nRazón: %s\n\n%s",
   "userid_is_active": "Tu userId (%s), ya está activo.",
   "no_license": "No pudimos verificar tu licencia de juego.",
-  "server_restarting": "El servidor está a punto de reiniciar. No puedes unirte en estos momentos."
+  "server_restarting": "El servidor está a punto de reiniciar. No puedes unirte en estos momentos.",
+  "conn_no_license": "No se ha encontrado tu licencia de Rockstar. Por favor, asegúrate de tener una copia legítima de GTA V.",
+  "conn_no_steam": "No se ha encontrado tu SteamID. Por favor, asegúrate de tener Steam abierto antes de iniciar FiveM.",
+  "conn_mismatched_identifiers": "Tu SteamID y licencia de Rockstar no coinciden con la cuenta que ingresaste al servidor, por favor, verifica que ingreses con las mismas cuentas.",
+  "conn_steam_in_use": "Tu SteamID ya está en uso en el servidor, verifica que estás lanzando el juego con la misma licencia de Rockstar.",
+  "conn_license_in_use": "Tu licencia de Rockstar ya está en uso en el servidor, verifica que estás lanzando el juego con la misma cuenta de Steam."
 }

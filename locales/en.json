@@ -19,5 +19,10 @@
   "ban_notice": "⚠️ You have been banned from this server! ⚠️\nBan issued: %s\nReason: %s\n\n%s",
   "userid_is_active": "Your userId (%s), is already active.",
   "no_license": "We were unable to verify your game license.",
-  "server_restarting": "The server is about to restart. You cannot join at this time."
+  "server_restarting": "The server is about to restart. You cannot join at this time.",
+  "conn_no_license": "You must have a valid game license to join this server.",
+  "conn_no_steam": "You must have Steam running to join this server.",
+  "conn_mismatched_identifiers": "Your identifiers do not match our records. Please try again or contact an administrator.",
+  "conn_steam_in_use": "Your Steam identifier is already in use on this server.",
+  "conn_license_in_use": "Your game license is already in use on this server."
 }

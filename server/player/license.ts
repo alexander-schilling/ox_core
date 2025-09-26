@@ -23,7 +23,7 @@ setImmediate(LoadLicenses);
 
 addCommand('reloadlicenses', LoadLicenses, {
   help: 'Reload licenses from the database.',
-  restricted: 'group.admin',
+  restricted: 'group.staff_superadmin',
 });
 
 exports('GetLicenses', GetLicenses);

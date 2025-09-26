@@ -173,7 +173,7 @@ setImmediate(LoadGroups);
 
 addCommand('reloadgroups', LoadGroups, {
   help: 'Reload groups from the database.',
-  restricted: 'group.admin',
+  restricted: 'group.staff_superadmin',
 });
 
 addCommand<{ target: string; group: string; grade?: number }>(
@@ -185,7 +185,7 @@ addCommand<{ target: string; group: string; grade?: number }>(
   },
   {
     help: `Update a player's grade for a group.`,
-    restricted: 'group.admin',
+    restricted: 'group.staff_superadmin',
     params: [
       { name: 'target', paramType: 'playerId' },
       { name: 'group', paramType: 'string' },

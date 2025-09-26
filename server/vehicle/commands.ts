@@ -18,7 +18,7 @@ export function DeleteCurrentVehicle(ped: number) {
 }
 
 addCommand<{ model: string; owner?: number }>(
-  'car',
+  'core_car',
   async (playerId, args, raw) => {
     const ped = playerId && GetPlayerPed(playerId as any);
 
@@ -49,12 +49,12 @@ addCommand<{ model: string; owner?: number }>(
         optional: true,
       },
     ],
-    restricted: 'group.admin',
+    restricted: 'group.staff_superadmin',
   },
 );
 
 addCommand<{ radius?: number; owned?: string }>(
-  'dv',
+  'core_dv',
   async (playerId, args, raw) => {
     const ped = GetPlayerPed(playerId as any);
 
@@ -80,6 +80,6 @@ addCommand<{ radius?: number; owned?: string }>(
       { name: 'radius', paramType: 'number', help: 'The radius to despawn vehicles (defaults to 2).', optional: true },
       { name: 'owned', help: 'Include player-owned vehicles.', optional: true },
     ],
-    restricted: 'group.admin',
+    restricted: 'group.staff_superadmin',
   },
 );

@@ -1,5 +1,5 @@
 import { OxPlayer } from 'player/class';
-import { CreateUser, GetUserIdFromIdentifier, IsUserBanned, UpdateUserTokens } from './db';
+import { CreateUser, GetUserIdFromIdentifier, GetUserIdFromSteam, IsUserBanned, UpdateUserTokens } from './db';
 import { GetIdentifiers, GetPlayerLicense } from 'utils';
 import { DEBUG, SV_LAN } from '../config';
 import type { Dict } from 'types';
@@ -64,6 +64,58 @@ async function loadPlayer(playerId: number) {
   }
 }
 
+async function checkIdentifiers(playerId: number, playerName: string) {
+  const licenseIdentifier = GetPlayerLicense(playerId);
+  const steamIdentifier = GetPlayerIdentifierByType(playerId.toString(), "steam");
+
+  if (!licenseIdentifier) {
+    console.info(
+      `Player [${playerId}] ${playerName} is missing a license identifier.`
+    );
+    return locales("conn_no_license");
+  }
+
+  if (!steamIdentifier) {
+    console.info(
+      `Player [${playerId}] ${playerName} is missing a steam identifier.`
+    );
+    return locales("conn_no_steam");
+  }
+
+  const cleanLicenseIdentifier = licenseIdentifier.substring(licenseIdentifier.indexOf(':') + 1);
+  const cleanSteamIdentifier = steamIdentifier.substring(steamIdentifier.indexOf(':') + 1);
+
+  const dbSteamUserId = (await GetUserIdFromSteam(cleanSteamIdentifier)) ?? 0;
+  const dbLicenseUserId = (await GetUserIdFromIdentifier(cleanLicenseIdentifier)) ?? 0;
+
+  if (!dbSteamUserId && !dbLicenseUserId) {
+    return true;
+  }
+
+  if (dbSteamUserId && dbLicenseUserId && dbSteamUserId !== dbLicenseUserId) {
+    console.info(
+      `Player [${playerId}] ${playerName} has a mismatched steam and license identifier.`
+    );
+    return locales("conn_mismatched_identifiers");
+  }
+
+  if (dbSteamUserId && !dbLicenseUserId) {
+    console.info(
+      `Player [${playerId}] ${playerName} has a steam identifier already in use.`
+    );
+    return locales("conn_steam_in_use");
+  }
+
+  if (!dbSteamUserId && dbLicenseUserId) {
+    console.info(
+      `Player [${playerId}] ${playerName} has a license identifier already in use.`
+    );
+    return locales("conn_license_in_use");
+  }
+
+  return true;
+}
+
 let serverLockdown: string;
 
 setInterval(() => {
@@ -83,6 +135,9 @@ on('playerConnecting', async (username: string, _: any, deferrals: any) => {
   deferrals.defer();
 
   if (serverLockdown) return deferrals.done(serverLockdown);
+
+  const identifiersChecked = await checkIdentifiers(tempId, username);
+  if (identifiersChecked !== true) return deferrals.done(identifiersChecked);
 
   const player = await loadPlayer(tempId);
 

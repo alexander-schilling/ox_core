@@ -31,6 +31,6 @@ addCommand<{ parseAll: boolean }>(
   {
     help: 'Parses and generates vehicle data for all vehicle models available on a client.',
     params: [{ name: 'parseAll', optional: true, help: 'Include vehicles with existing data in the data generation.' }],
-    restricted: 'group.admin',
+    restricted: 'group.staff_superadmin',
   },
 );

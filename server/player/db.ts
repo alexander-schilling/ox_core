@@ -7,6 +7,10 @@ export function GetUserIdFromIdentifier(identifier: string, offset?: number) {
   return db.column<number>('SELECT userId FROM users WHERE license2 = ? LIMIT ?, 1', [identifier, offset || 0]);
 }
 
+export function GetUserIdFromSteam(identifier: string, offset?: number) {
+  return db.column<number>('SELECT userId FROM users WHERE steam = ? LIMIT ?, 1', [identifier, offset || 0]);
+}
+
 export function CreateUser(username: string, { license2, steam, fivem, discord }: Dict<string>) {
   return db.insert('INSERT INTO users (username, license2, steam, fivem, discord) VALUES (?, ?, ?, ?, ?)', [
     username,
